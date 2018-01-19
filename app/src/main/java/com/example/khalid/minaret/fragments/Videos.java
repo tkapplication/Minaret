@@ -71,14 +71,14 @@ public class Videos extends Fragment {
     }
 
     private void getVideoYoutube(String idPlayList) {
-        String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="+idPlayList+"&key="+Youtube_API_Key+"&maxResults=50";
+        String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + idPlayList + "&key=" + Youtube_API_Key + "&maxResults=50";
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray jsonArray = response.getJSONArray("items");
-                    for (int i = 0 ; i<jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObjectitem = jsonArray.getJSONObject(i);
 
                         JSONObject jsonObjectsnippet = jsonObjectitem.getJSONObject("snippet");
@@ -91,7 +91,7 @@ public class Videos extends Fragment {
                         JSONObject jsonObjectresourceId = jsonObjectsnippet.getJSONObject("resourceId");
                         String resourceid = jsonObjectresourceId.getString("videoId");
 
-                        mangvideoyoutube.add(new Video(i,title,urlimage,resourceid));
+                        mangvideoyoutube.add(new Video(i, title, urlimage, resourceid));
                     }
                     videoAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {

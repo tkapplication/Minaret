@@ -73,6 +73,7 @@ public class Database extends SQLiteOpenHelper {
         }
         return onsaleproduct;
     }
+
     public void deleteMessage(String title) {
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(messages, "title=?", new String[]{title});

@@ -33,19 +33,18 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        listView =  findViewById(R.id.listview);
-
+        listView = findViewById(R.id.listview);
 
 
         mangvideoyoutube = new ArrayList<>();
-        videoAdapter = new VideoAdapter(Main2Activity.this,mangvideoyoutube);
+        videoAdapter = new VideoAdapter(Main2Activity.this, mangvideoyoutube);
         listView.setAdapter(videoAdapter);
         getVideoYoutube(IDPlayList);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(Main2Activity.this,YoutubeActivity.class);
-                intent.putExtra("resourceid",mangvideoyoutube.get(i).getUrlVideo());
+                Intent intent = new Intent(Main2Activity.this, YoutubeActivity.class);
+                intent.putExtra("resourceid", mangvideoyoutube.get(i).getUrlVideo());
                 startActivity(intent);
             }
         });
@@ -93,14 +92,14 @@ public class Main2Activity extends AppCompatActivity {
 //    }
 
     private void getVideoYoutube(String idPlayList) {
-        String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="+idPlayList+"&key="+Youtube_API_Key+"&maxResults=50";
+        String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + idPlayList + "&key=" + Youtube_API_Key + "&maxResults=50";
         RequestQueue requestQueue = Volley.newRequestQueue(Main2Activity.this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray jsonArray = response.getJSONArray("items");
-                    for (int i = 0 ; i<jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObjectitem = jsonArray.getJSONObject(i);
 
                         JSONObject jsonObjectsnippet = jsonObjectitem.getJSONObject("snippet");
@@ -113,7 +112,7 @@ public class Main2Activity extends AppCompatActivity {
                         JSONObject jsonObjectresourceId = jsonObjectsnippet.getJSONObject("resourceId");
                         String resourceid = jsonObjectresourceId.getString("videoId");
 
-                        mangvideoyoutube.add(new Video(i,title,urlimage,resourceid));
+                        mangvideoyoutube.add(new Video(i, title, urlimage, resourceid));
                     }
                     videoAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {

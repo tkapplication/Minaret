@@ -9,22 +9,23 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
+public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     String urlVideo;
     YouTubePlayerView youTubePlayerView;
     int Request_Code_ErorUser = 123;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
 
-        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtubeplayerview);
+        youTubePlayerView = findViewById(R.id.youtubeplayerview);
 
         Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
             urlVideo = intent.getStringExtra("resourceid");
-            youTubePlayerView.initialize(Main2Activity.Youtube_API_Key,this);
+            youTubePlayerView.initialize(Main2Activity.Youtube_API_Key, this);
         }
     }
 
@@ -36,17 +37,17 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        if (youTubeInitializationResult.isUserRecoverableError()){
-            youTubeInitializationResult.getErrorDialog(YoutubeActivity.this,Request_Code_ErorUser);
-        }else {
+        if (youTubeInitializationResult.isUserRecoverableError()) {
+            youTubeInitializationResult.getErrorDialog(YoutubeActivity.this, Request_Code_ErorUser);
+        } else {
             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Request_Code_ErorUser){
-            youTubePlayerView.initialize(Main2Activity.Youtube_API_Key,this);
+        if (requestCode == Request_Code_ErorUser) {
+            youTubePlayerView.initialize(Main2Activity.Youtube_API_Key, this);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

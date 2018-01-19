@@ -10,11 +10,9 @@
     card_view:cardCornerRadius="@dimen/_5sdp"
     card_view:cardElevation="@dimen/_3sdp"
     card_view:cardUseCompatPadding="true"
-    card_view:contentPadding="@dimen/_5sdp"
-    >
+    card_view:contentPadding="@dimen/_5sdp">
 
-    <RelativeLayout
-        xmlns:app="http://schemas.android.com/tools"
+    <RelativeLayout xmlns:app="http://schemas.android.com/tools"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

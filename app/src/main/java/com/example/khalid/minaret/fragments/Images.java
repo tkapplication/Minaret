@@ -43,6 +43,7 @@ public class Images extends Fragment {
     ProgressBar progressBar;
     ImageView scroll;
     GridLayoutManager gridLayoutManager;
+
     public static Images newInstance() {
         Images news = new Images();
         return news;
@@ -60,7 +61,7 @@ public class Images extends Fragment {
         context = getActivity();
         recyclerView = view.findViewById(R.id.recycler);
         imageView = view.findViewById(R.id.imageView);
-         gridLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false);
+        gridLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         images = new ArrayList<>();
         imagesAdapter = new ImagesAdapter(context, images);
@@ -73,7 +74,7 @@ public class Images extends Fragment {
                 int lastVisibleItemIndex = gridLayoutManager.findLastVisibleItemPosition();
 
                 if (lastVisibleItemIndex >= totalItemCount) return;
-                gridLayoutManager.smoothScrollToPosition(recyclerView,null,lastVisibleItemIndex+1);
+                gridLayoutManager.smoothScrollToPosition(recyclerView, null, lastVisibleItemIndex + 1);
 
 
             }

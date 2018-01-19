@@ -45,11 +45,11 @@ public class Register extends AppCompatActivity {
                 .build()
         );
         setContentView(R.layout.activity_register);
-        username = (EditText) findViewById(R.id.username);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
-        register = (Button) findViewById(R.id.register);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        register = findViewById(R.id.register);
+        progressBar = findViewById(R.id.progressBar);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +119,7 @@ public class Register extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString("status").equals("ok")) {
                                 startActivity(new Intent(Register.this, Login.class));
-                                insertToken(email.getText().toString(),jsonObject.getString("user_id"));
+                                insertToken(email.getText().toString(), jsonObject.getString("user_id"));
                             }
                             progressBar.setVisibility(View.GONE);
 
@@ -165,7 +165,7 @@ public class Register extends AppCompatActivity {
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
-    private void insertToken(String email,String id) {
+    private void insertToken(String email, String id) {
         String url = base_url + "insert_token.php?user_id=" + id +
                 "&token=" + FirebaseInstanceId.getInstance().getToken() +
                 "&email=" + email;

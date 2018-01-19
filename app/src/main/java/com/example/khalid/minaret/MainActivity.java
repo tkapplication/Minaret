@@ -38,27 +38,27 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         title = toolbar.findViewById(R.id.toolbar_title);
         title.setText("Minaret");
         setSupportActionBar(toolbar);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-        content = (FrameLayout) findViewById(R.id.content);
+        content = findViewById(R.id.content);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         bundle = getIntent().getExtras();
 
         fragmentManager = getSupportFragmentManager();
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        if (bundle != null) {
-
-            final FragmentTransaction transaction4 = fragmentManager.beginTransaction();
-            transaction4.replace(R.id.content, Messages.newInstance()).commit();
-        }
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        if (bundle != null) {
+//
+//            final FragmentTransaction transaction4 = fragmentManager.beginTransaction();
+//            transaction4.replace(R.id.content, Messages.newInstance()).commit();
+//        }
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("news");
         transaction4.replace(R.id.content, News.newInstance()).commit();
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(Gravity.RIGHT)) {
             drawer.closeDrawer(Gravity.RIGHT);
         } else {
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.videos) {
             final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("videos");
             transaction4.add(R.id.content, Videos.newInstance()).commit();
-        }else if (id == R.id.settings) {
+        } else if (id == R.id.settings) {
             final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("settings");
             transaction4.add(R.id.content, Settings.newInstance()).commit();
         } else if (id == R.id.message) {
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity
             final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("platform");
             transaction4.add(R.id.content, Platform.newInstance()).commit();
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(Gravity.RIGHT);
         return true;
     }

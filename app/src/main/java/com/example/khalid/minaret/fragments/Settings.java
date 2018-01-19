@@ -33,11 +33,10 @@ import static com.example.khalid.minaret.utils.Utils.save;
 public class Settings extends Fragment implements View.OnClickListener {
 
 
-
-        LinearLayout  sound, light;
-        TextView  soundvalue, lightvalue;
-        String chosenRingtone;
-        CheckBox vibration;
+    LinearLayout sound, light;
+    TextView soundvalue, lightvalue;
+    String chosenRingtone;
+    CheckBox vibration;
 
     public static Settings newInstance() {
         Settings fragment = new Settings();
@@ -66,7 +65,6 @@ public class Settings extends Fragment implements View.OnClickListener {
             vibration.setChecked(true);
         } else
             vibration.setChecked(false);
-
 
 
         switch (get(getActivity(), "notification_light")) {
@@ -133,13 +131,13 @@ public class Settings extends Fragment implements View.OnClickListener {
         final View dialogView = inflater.inflate(R.layout.notification_light, null);
         dialogBuilder.setView(dialogView);
         dialogBuilder.setCancelable(false);
-        final RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.group);
-        RadioButton red = (RadioButton) dialogView.findViewById(R.id.red);
-        RadioButton white = (RadioButton) dialogView.findViewById(R.id.white);
-        RadioButton blue = (RadioButton) dialogView.findViewById(R.id.blue);
-        RadioButton yellow = (RadioButton) dialogView.findViewById(R.id.yellow);
-        RadioButton cyan = (RadioButton) dialogView.findViewById(R.id.cyan);
-        RadioButton green = (RadioButton) dialogView.findViewById(R.id.green);
+        final RadioGroup radioGroup = dialogView.findViewById(R.id.group);
+        RadioButton red = dialogView.findViewById(R.id.red);
+        RadioButton white = dialogView.findViewById(R.id.white);
+        RadioButton blue = dialogView.findViewById(R.id.blue);
+        RadioButton yellow = dialogView.findViewById(R.id.yellow);
+        RadioButton cyan = dialogView.findViewById(R.id.cyan);
+        RadioButton green = dialogView.findViewById(R.id.green);
 
         switch (get(getActivity(), "notification_light")) {
 

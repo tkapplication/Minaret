@@ -39,21 +39,23 @@ public class VideoAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return 0;
     }
-    class ViewHolder{
+
+    class ViewHolder {
         TextView txttitle;
         ImageView imgvideo;
     }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
-        if (view == null){
+        if (view == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
-            view = layoutInflater.inflate(R.layout.dong_video,null);
+            view = layoutInflater.inflate(R.layout.dong_video, null);
             viewHolder = new ViewHolder();
             viewHolder.txttitle = view.findViewById(R.id.textviewtitle);
             viewHolder.imgvideo = view.findViewById(R.id.imageviewvideo);
             view.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
         Video video = (Video) getItem(i);
