@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_45sdp"
+            android:paddingRight="@dimen/_45sdp"
+            android:paddingTop="@dimen/_30sdp"
+            tools:context="com.example.khalid.minaret.Login">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:src="@drawable/logo" />
+
+            <EditText
+                android:textColor="#fff"
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:background="@drawable/edit_shape"
+                android:gravity="center_horizontal"
+                android:hint="حسابك"
+                android:inputType="text"
+                android:padding="@dimen/_12sdp"
+                android:textSize="@dimen/_18sdp" />
+
+            <EditText
+                android:textColor="#fff"
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="@drawable/edit_shape"
+                android:gravity="center_horizontal"
+                android:hint="رمز المرور"
+                android:inputType="textPassword"
+                android:padding="@dimen/_12sdp"
+                android:textSize="@dimen/_18sdp" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="@drawable/button_shape"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/_10sdp"
+                android:text="تسجيل الدخول"
+                android:textColor="@color/textcolor"
+                android:textSize="@dimen/_18sdp" />
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edit_shape"
+                android:gravity="center"
+                android:padding="@dimen/_15sdp"
+                android:text="إنشاء حساب"
+                android:textColor="#fff"
+                android:textSize="@dimen/_18sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="تسجيل الدخول مع "
+                android:textColor="#fff"
+                android:textSize="@dimen/_18sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <ImageView
+                    android:id="@+id/facebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_facebook" />
+
+                <ImageView
+                    android:id="@+id/twitter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_twitter" />
+
+                <ImageView
+                    android:id="@+id/gmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_google" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:progressDrawable="@drawable/circular"
+            android:visibility="gone" />
+    </RelativeLayout>
+</ScrollView>

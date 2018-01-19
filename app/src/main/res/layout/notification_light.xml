@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_15sdp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="اختر لون"
+        android:textColor="#000"
+        android:textSize="@dimen/_18sdp" />
+
+    <RadioGroup
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:checkedButton="@+id/red">
+
+        <RadioButton
+            android:id="@+id/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/white"
+            android:textSize="@dimen/_18sdp" />
+
+
+        <RadioButton
+            android:id="@+id/red"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/red"
+            android:textSize="@dimen/_18sdp" />
+
+        <RadioButton
+            android:id="@+id/green"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/green"
+            android:textSize="@dimen/_18sdp" />
+
+        <RadioButton
+            android:id="@+id/yellow"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/yellow"
+            android:textSize="@dimen/_18sdp" />
+
+        <RadioButton
+            android:id="@+id/blue"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/blue"
+            android:textSize="@dimen/_18sdp" />
+
+        <RadioButton
+            android:id="@+id/cyan"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/cyan"
+            android:textSize="@dimen/_18sdp" />
+    </RadioGroup>
+</RelativeLayout>

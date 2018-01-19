@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/_10sdp"
+    android:layoutDirection="rtl"
+    android:background="@drawable/background"
+   >
+
+
+
+    <LinearLayout
+        android:id="@+id/soundpopup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:layout_width="@dimen/_26sdp"
+
+            android:layout_height="@dimen/_26sdp"
+            android:layout_gravity="center"
+
+            android:padding="@dimen/_1sdp"
+            app:srcCompat="@drawable/ic_alarm" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="صوت الاشعارات"
+                android:textColor="#fff"
+                android:textSize="@dimen/_15sdp" />
+
+            <TextView
+                android:textColor="#fff"
+
+                android:id="@+id/soundvalue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5sp"
+        android:layout_marginBottom="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:background="#fff" />
+
+    <LinearLayout
+        android:id="@+id/lightpopup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:layout_width="match_parent"
+
+            android:layout_height="@dimen/_26sdp"
+            android:layout_gravity="center"
+            android:layout_weight="1.8"
+            app:srcCompat="@drawable/ic_lightbulb_outline_black_24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="ضوء الاشعارات"
+                android:textColor="#fff"
+                android:textSize="@dimen/_15sdp" />
+
+
+            <TextView
+                android:textColor="#fff"
+
+                android:id="@+id/lightvalue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5sp"
+        android:layout_marginBottom="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:background="#fff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+
+        <CheckBox
+            android:id="@+id/vibration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="الاهتزاز عند التنبيه"
+            android:textColor="#fff"
+            android:textSize="@dimen/_15sdp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5sp"
+        android:layout_marginBottom="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:background="#fff" />
+</LinearLayout>
