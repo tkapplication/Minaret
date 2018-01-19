@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         title = toolbar.findViewById(R.id.toolbar_title);
-        title.setText("Minaret");
+        title.setText("Minaret2");
         setSupportActionBar(toolbar);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         content = findViewById(R.id.content);
