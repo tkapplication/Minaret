@@ -72,6 +72,7 @@
 
 
                     <ImageView
+                        android:id="@+id/comment"
                         android:layout_width="@dimen/_26sdp"
                         android:layout_height="@dimen/_26sdp"
                         android:layout_marginRight="@dimen/_10sdp"
@@ -117,13 +118,13 @@
                 </LinearLayout>
 
                 <TextView
-                    android:textAlignment="gravity"
-                    android:gravity="left"
                     android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="left"
+                    android:textAlignment="gravity"
                     android:textColor="#fff"
                     android:textSize="@dimen/_14sdp" />
 

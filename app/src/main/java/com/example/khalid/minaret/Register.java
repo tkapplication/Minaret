@@ -35,6 +35,7 @@ public class Register extends AppCompatActivity {
     EditText username, email, password;
     Button register;
     ProgressBar progressBar;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,12 @@ public class Register extends AppCompatActivity {
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
         progressBar = findViewById(R.id.progressBar);
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+            username.setText(bundle.getString("username"));
+            email.setText(bundle.getString("email"));
+        }
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override

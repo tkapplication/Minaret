@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.khalid.minaret.MainActivity;
+import com.example.khalid.minaret.OnItemClickListener;
 import com.example.khalid.minaret.R;
 import com.example.khalid.minaret.fragments.PostDetails;
 import com.example.khalid.minaret.models.Post;
@@ -28,13 +29,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     ArrayList<Post> list;
     FragmentManager fragmentManager;
     Database database;
+    OnItemClickListener onItemClickListener;
     private Context context;
 
-    public NewsAdapter(Context context, ArrayList<Post> list) {
+    public NewsAdapter(Context context, ArrayList<Post> list, OnItemClickListener onItemClickListener) {
         this.list = list;
         this.context = context;
         fragmentManager = ((MainActivity) context).getSupportFragmentManager();
         database = new Database(context);
+        this.onItemClickListener = onItemClickListener;
     }
 
 
@@ -74,10 +77,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return list.size();
     }
 
+    public void setCustomButtonListener(OnItemClickListener customButtonListener) {
+        this.onItemClickListener = customButtonListener;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title, date, content, comment_count, love_count;
 
-        ImageView love, love_border, image;
+        ImageView love, love_border, image, comment;
 
         public ViewHolder(View view) {
 
@@ -90,8 +97,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             content = view.findViewById(R.id.content);
             comment_count = view.findViewById(R.id.commentcount);
             love_count = view.findViewById(R.id.lovecount);
+            comment = view.findViewById(R.id.comment);
 
-
+            comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onButtonClickListener(getAdapterPosition());
+                    }
+                }
+            });
             love_border.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -126,6 +141,5 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             });
         }
     }
-
 }
 

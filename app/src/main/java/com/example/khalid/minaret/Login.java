@@ -187,7 +187,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                         if (task.isSuccessful()) {
 
-                            checkEmail(acct.getEmail());
+                            checkEmail(acct.getEmail(), acct.getDisplayName());
                         } else {
                             Toast.makeText(Login.this, "Something went wrong", Toast.LENGTH_LONG).show();
                         }
@@ -206,7 +206,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            checkEmail(user.getEmail());
+                            checkEmail(user.getEmail(), user.getDisplayName());
 
 
                         } else {
@@ -237,7 +237,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             Toast.makeText(Login.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            checkEmail(task.getResult().getUser().getEmail());
+                            checkEmail(task.getResult().getUser().getEmail(), task.getResult().getUser().getDisplayName());
 
                         }
                     }
@@ -392,7 +392,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onStart();
     }
 
-    private void checkEmail(String email) {
+    private void checkEmail(final String email, final String username) {
         String url = base_url + "check_email.php?user_email=" + email;
         StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -402,8 +402,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString("status").equals("yes")) {
-
+                                save(getApplicationContext(), "username", username);
+                                save(getApplicationContext(), "user_email", email);
+                                save(getApplicationContext(), "user_id", jsonObject.getString("id"));
+                                startActivity(new Intent(Login.this, MainActivity.class));
                             } else {
+                                Intent intent = new Intent(Login.this, Register.class);
+                                intent.putExtra("username", username);
+                                intent.putExtra("email", email);
+                                startActivity(intent);
 
                             }
 

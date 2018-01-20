@@ -1,37 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:orientation="vertical"
-    android:padding="@dimen/_5sdp">
+    android:background="#efefef">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
+    <include layout="@layout/news_content" />
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:color="#d0ae89"
-        android:radius="7dp"
-        android:visibility="gone"
-        app:dd_animationDuration="500"
-        app:dd_horizontalSpacing="4dp"
-        app:dd_numDots="5"
-        app:dd_scaleMultiplier="1.5" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:progressDrawable="@drawable/circular" />
-</RelativeLayout>
+    <include layout="@layout/comment" />
+</android.support.design.widget.CoordinatorLayout>
