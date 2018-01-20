@@ -1,6 +1,9 @@
 package com.example.khalid.minaret.Adapter;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.khalid.minaret.MainActivity;
 import com.example.khalid.minaret.R;
+import com.example.khalid.minaret.fragments.PostDetails;
 import com.example.khalid.minaret.models.Post;
+import com.example.khalid.minaret.utils.Database;
 
 import java.util.ArrayList;
 
@@ -19,14 +25,16 @@ import java.util.ArrayList;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-    private Context context;
     ArrayList<Post> list;
-
+    FragmentManager fragmentManager;
+    Database database;
+    private Context context;
 
     public NewsAdapter(Context context, ArrayList<Post> list) {
         this.list = list;
         this.context = context;
-
+        fragmentManager = ((MainActivity) context).getSupportFragmentManager();
+        database = new Database(context);
     }
 
 
@@ -50,6 +58,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 .placeholder(R.drawable.no_image)
                 .error(R.drawable.no_image)
                 .into(holder.image);
+        if (database.checkFavorite(list.get(position).getId())) {
+            holder.love.setVisibility(View.VISIBLE);
+            holder.love_border.setVisibility(View.GONE);
+        } else {
+            holder.love.setVisibility(View.GONE);
+            holder.love_border.setVisibility(View.VISIBLE);
+        }
+
     }
 
 
@@ -81,6 +97,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 public void onClick(View view) {
                     love.setVisibility(View.VISIBLE);
                     love_border.setVisibility(View.GONE);
+                    database.addFavorite(list.get(getAdapterPosition()));
                 }
             });
 
@@ -89,6 +106,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 public void onClick(View view) {
                     love.setVisibility(View.GONE);
                     love_border.setVisibility(View.VISIBLE);
+                    database.deleteFavorite(list.get(getAdapterPosition()).getId());
+                }
+            });
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PostDetails messageDetails = new PostDetails();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", list.get(getAdapterPosition()).getTitle());
+                    bundle.putString("content", list.get(getAdapterPosition()).getContent());
+                    bundle.putString("date", list.get(getAdapterPosition()).getDate());
+                    bundle.putString("image", list.get(getAdapterPosition()).getImage());
+
+                    messageDetails.setArguments(bundle);
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack("post");
+                    fragmentTransaction.add(R.id.content, messageDetails).commit();
                 }
             });
         }

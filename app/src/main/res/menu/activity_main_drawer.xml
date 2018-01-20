@@ -33,6 +33,10 @@
             android:icon="@drawable/ic_calender"
             android:title="التقويم" />
         <item
+            android:id="@+id/favorite"
+            android:icon="@drawable/ic_favorite_border_black_24dp"
+            android:title="المقالات المفضلة" />
+        <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_settings"
             android:title="الاعدادت" />

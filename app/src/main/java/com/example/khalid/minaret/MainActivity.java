@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.khalid.minaret.fragments.Contact;
+import com.example.khalid.minaret.fragments.Favorite;
 import com.example.khalid.minaret.fragments.Images;
 import com.example.khalid.minaret.fragments.Messages;
 import com.example.khalid.minaret.fragments.News;
@@ -103,17 +104,22 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case "videos":
                         title.setText("الفيديو");
-                        navigationView.setCheckedItem(R.id.platform);
+                        navigationView.setCheckedItem(R.id.videos);
 
                         break;
                     case "messages":
                         title.setText("الرسائل");
-                        navigationView.setCheckedItem(R.id.platform);
+                        navigationView.setCheckedItem(R.id.message);
 
                         break;
                     case "settings":
                         title.setText("الاعدادات");
-                        navigationView.setCheckedItem(R.id.platform);
+                        navigationView.setCheckedItem(R.id.settings);
+
+                        break;
+                    case "favorite":
+                        title.setText("المقالات المفضلة");
+                        navigationView.setCheckedItem(R.id.favorite);
 
                         break;
 
@@ -148,6 +154,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.message) {
             final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("messages");
             transaction4.add(R.id.content, Messages.newInstance()).commit();
+        } else if (id == R.id.favorite) {
+            final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("favorite");
+            transaction4.add(R.id.content, Favorite.newInstance()).commit();
         } else if (id == R.id.logout) {
             Intent i = new Intent(MainActivity.this, Login.class);
             // Closing all the Activities
