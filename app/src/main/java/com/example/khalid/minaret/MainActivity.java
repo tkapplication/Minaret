@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.khalid.minaret.fragments.Calender;
 import com.example.khalid.minaret.fragments.Contact;
 import com.example.khalid.minaret.fragments.Favorite;
 import com.example.khalid.minaret.fragments.Images;
@@ -122,6 +123,11 @@ public class MainActivity extends AppCompatActivity
                         navigationView.setCheckedItem(R.id.favorite);
 
                         break;
+                    case "calendar":
+                        title.setText("التقويم");
+                        navigationView.setCheckedItem(R.id.calender);
+
+                        break;
 
                 }
             }
@@ -157,6 +163,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.favorite) {
             final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("favorite");
             transaction4.add(R.id.content, Favorite.newInstance()).commit();
+        } else if (id == R.id.calender) {
+            final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("calendar");
+            transaction4.add(R.id.content, Calender.newInstance()).commit();
         } else if (id == R.id.logout) {
             Intent i = new Intent(MainActivity.this, Login.class);
             // Closing all the Activities

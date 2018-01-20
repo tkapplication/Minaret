@@ -65,6 +65,7 @@ import static com.example.khalid.minaret.utils.Utils.isInternetAvailable;
 import static com.example.khalid.minaret.utils.Utils.save;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
+    private static final int RC_SIGN_IN = 9001;
     Button register;
     EditText username, password;
     Button login;
@@ -75,7 +76,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     TwitterAuthClient mTwitterAuthClient;
     GoogleSignInOptions gso;
     GoogleApiClient mGoogleApiClient;
-    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,10 +186,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         Log.d("sd", "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(Login.this, acct.getDisplayName(), Toast.LENGTH_LONG).show();
 
-                            save(getApplicationContext(), "profile_name", acct.getDisplayName());
-                            save(getApplicationContext(), "profile_email", acct.getEmail());
+                            checkEmail(acct.getEmail());
                         } else {
                             Toast.makeText(Login.this, "Something went wrong", Toast.LENGTH_LONG).show();
                         }
@@ -208,10 +206,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            //   checkemail(user.getEmail());
-                            Toast.makeText(Login.this, user.getEmail(), Toast.LENGTH_SHORT).show();
-                            save(getApplicationContext(), "profile_username", user.getDisplayName());
-                            save(getApplicationContext(), "profile_email", user.getEmail());
+                            checkEmail(user.getEmail());
+
 
                         } else {
 
@@ -236,9 +232,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
+
                             Log.w("", "signInWithCredential", task.getException());
                             Toast.makeText(Login.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            checkEmail(task.getResult().getUser().getEmail());
+
                         }
                     }
                 });
@@ -392,4 +392,38 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onStart();
     }
 
+    private void checkEmail(String email) {
+        String url = base_url + "check_email.php?user_email=" + email;
+        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getString("status").equals("yes")) {
+
+                            } else {
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+
+        });
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest2).
+                setRetryPolicy(new DefaultRetryPolicy(
+                        10000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    }
 }
