@@ -264,6 +264,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                 save(getApplicationContext(), "user_email", jsonObject.getJSONObject("user").getString("email"));
                                 save(getApplicationContext(), "user_id", jsonObject.getJSONObject("user").getString("id"));
                                 save(getApplicationContext(), "login", "yes");
+                                save(getApplicationContext(), "cookie", jsonObject.getString("cookie"));
+
                                 startActivity(new Intent(Login.this, MainActivity.class));
                                 updateToken();
                             } else {
