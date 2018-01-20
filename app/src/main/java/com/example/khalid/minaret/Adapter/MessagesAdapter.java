@@ -1,14 +1,19 @@
 package com.example.khalid.minaret.Adapter;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.khalid.minaret.MainActivity;
 import com.example.khalid.minaret.R;
+import com.example.khalid.minaret.fragments.MessageDetails;
 import com.example.khalid.minaret.models.Message;
 
 import java.util.ArrayList;
@@ -18,13 +23,14 @@ import java.util.ArrayList;
  */
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHolder> {
-    private Context context;
     ArrayList<Message> list;
-
+    FragmentManager fragmentManager;
+    private Context context;
 
     public MessagesAdapter(Context context, ArrayList<Message> list) {
         this.list = list;
         this.context = context;
+        fragmentManager = ((MainActivity) context).getSupportFragmentManager();
 
     }
 
@@ -49,13 +55,26 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title, message;
-        ImageView delete;
+        CardView cardView;
 
         public ViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
             message = view.findViewById(R.id.message);
-            delete = view.findViewById(R.id.delete);
+
+            cardView = view.findViewById(R.id.card_view);
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MessageDetails messageDetails = new MessageDetails();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", list.get(getAdapterPosition()).getTitle());
+                    bundle.putString("message", list.get(getAdapterPosition()).getMessage());
+                    messageDetails.setArguments(bundle);
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack("messages");
+                    fragmentTransaction.add(R.id.content, messageDetails).commit();
+                }
+            });
         }
     }
 

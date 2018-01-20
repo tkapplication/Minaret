@@ -36,20 +36,19 @@ import static com.example.khalid.minaret.MainActivity.title;
  */
 
 public class Images extends Fragment {
+    public static ImageView imageView;
     Context context;
     ArrayList<String> images;
-    public static ImageView imageView;
     ImagesAdapter imagesAdapter;
     ProgressBar progressBar;
     ImageView scroll;
     GridLayoutManager gridLayoutManager;
+    RecyclerView recyclerView;
 
     public static Images newInstance() {
         Images news = new Images();
         return news;
     }
-
-    RecyclerView recyclerView;
 
     @Nullable
     @Override
@@ -106,6 +105,7 @@ public class Images extends Fragment {
                                     .into(imageView);
                             recyclerView.setAdapter(imagesAdapter);
                             progressBar.setVisibility(View.GONE);
+                            scroll.setVisibility(View.VISIBLE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

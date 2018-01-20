@@ -27,9 +27,9 @@ import static com.example.khalid.minaret.utils.Utils.save;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static TextView title;
     FragmentManager fragmentManager;
     FrameLayout content;
-    public static TextView title;
     NavigationView navigationView;
     Bundle bundle;
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         title = toolbar.findViewById(R.id.toolbar_title);
-        title.setText("Minaret3");
+        title.setText("Minaret");
         setSupportActionBar(toolbar);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         content = findViewById(R.id.content);
