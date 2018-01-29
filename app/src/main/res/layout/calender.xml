@@ -13,4 +13,9 @@
         app:mcv_selectionColor="@color/colorPrimary"
         app:mcv_showOtherDates="all" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.khalid.minaret.models.CalenderModel;
 import com.example.khalid.minaret.models.Message;
 import com.example.khalid.minaret.models.Post;
 
@@ -22,9 +23,10 @@ public class Database extends SQLiteOpenHelper {
     String messages = "messages";
     Context context;
     String test = "test";
+    String calender = "calender";
 
     public Database(Context context) {
-        super(context, DataBase_Name, null, 2);
+        super(context, DataBase_Name, null, 3);
         this.context = context;
     }
 
@@ -45,6 +47,8 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+        String sql1 = "CREATE TABLE " + calender + " (id TEXT PRIMARY KEY,title TEXT,description TEXT,start_date TEXT,end_date TEXT)";
+        sqLiteDatabase.execSQL(sql1);
 
     }
 
@@ -58,6 +62,18 @@ public class Database extends SQLiteOpenHelper {
         database.insert(messages, null, values);
     }
 
+    public void addCalender(CalenderModel calenderModel) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", calenderModel.getId());
+        values.put("title", calenderModel.getTitle());
+        values.put("description", calenderModel.getDescription());
+        values.put("start_date", calenderModel.getStart_date());
+        values.put("end_date", calenderModel.getEnd_date());
+
+        database.insert(calender, null, values);
+    }
+
     public void addtest(Message message) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -67,6 +83,7 @@ public class Database extends SQLiteOpenHelper {
 
         database.insert(test, null, values);
     }
+
     public void addFavorite(Post post) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -105,6 +122,29 @@ public class Database extends SQLiteOpenHelper {
         return onsaleproduct;
     }
 
+    public ArrayList<CalenderModel> getCalender() {
+        ArrayList<CalenderModel> onsaleproduct = new ArrayList<>();
+
+
+        String selectQuery = "SELECT  * FROM " + calender;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                CalenderModel product = new CalenderModel();
+                product.setId(cursor.getString(0));
+                product.setTitle(cursor.getString(1));
+                product.setDescription(cursor.getString(2));
+                product.setStart_date(cursor.getString(3));
+                product.setEnd_date(cursor.getString(4));
+
+                onsaleproduct.add(product);
+            }
+            while (cursor.moveToNext());
+        }
+        return onsaleproduct;
+    }
 
     public ArrayList<Post> getFavorite() {
         ArrayList<Post> onsaleproduct = new ArrayList<>();

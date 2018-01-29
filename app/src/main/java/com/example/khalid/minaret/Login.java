@@ -404,10 +404,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString("status").equals("yes")) {
-                                save(getApplicationContext(), "username", username);
-                                save(getApplicationContext(), "user_email", email);
-                                save(getApplicationContext(), "user_id", jsonObject.getString("id"));
-                                startActivity(new Intent(Login.this, MainActivity.class));
+
+                                getPassword(jsonObject.getString("id"), email);
                             } else {
                                 Intent intent = new Intent(Login.this, Register.class);
                                 intent.putExtra("username", username);
@@ -419,6 +417,36 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+                }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+
+        });
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest2).
+                setRetryPolicy(new DefaultRetryPolicy(
+                        10000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    }
+
+    private void getPassword(final String id, final String email) {
+        String url = base_url + "get_password.php?user_id=" + id;
+        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            login(email, jsonObject.getString("password"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 }, new Response.ErrorListener() {
 

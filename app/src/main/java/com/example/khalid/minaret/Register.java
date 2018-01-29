@@ -127,6 +127,7 @@ public class Register extends AppCompatActivity {
                             if (jsonObject.getString("status").equals("ok")) {
                                 startActivity(new Intent(Register.this, Login.class));
                                 insertToken(email.getText().toString(), jsonObject.getString("user_id"));
+                                insertPassword(jsonObject.getString("user_id"), password.getText().toString());
                             }
                             progressBar.setVisibility(View.GONE);
 
@@ -176,6 +177,32 @@ public class Register extends AppCompatActivity {
         String url = base_url + "insert_token.php?user_id=" + id +
                 "&token=" + FirebaseInstanceId.getInstance().getToken() +
                 "&email=" + email;
+
+        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest2).
+                setRetryPolicy(new DefaultRetryPolicy(
+                        10000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+    }
+
+    private void insertPassword(String id, String password) {
+        String url = base_url + "insert_password.php?user_id=" + id +
+                "&password=" + password;
 
         StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
