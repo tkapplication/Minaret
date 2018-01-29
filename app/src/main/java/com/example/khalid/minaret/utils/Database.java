@@ -21,9 +21,10 @@ public class Database extends SQLiteOpenHelper {
     String favorite = "favorite";
     String messages = "messages";
     Context context;
+    String test = "test";
 
     public Database(Context context) {
-        super(context, DataBase_Name, null, 1);
+        super(context, DataBase_Name, null, 2);
         this.context = context;
     }
 
@@ -33,7 +34,8 @@ public class Database extends SQLiteOpenHelper {
         String sql1 = "CREATE TABLE " + messages + " (title TEXT,message TEXT)";
         String sql2 = "CREATE TABLE " + favorite + " (id TEXT PRIMARY KEY,title TEXT,content TEXT,date TEXT,image TEXT,comment TEXT,comment_count TEXT,favorite_count TEXT)";
 
-
+        String sql3 = "CREATE TABLE " + test + " (title TEXT,message TEXT)";
+        sqLiteDatabase.execSQL(sql3);
         sqLiteDatabase.execSQL(sql1);
         sqLiteDatabase.execSQL(sql2);
 
@@ -42,6 +44,7 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
 
     }
 
@@ -55,6 +58,15 @@ public class Database extends SQLiteOpenHelper {
         database.insert(messages, null, values);
     }
 
+    public void addtest(Message message) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("title", message.getTitle());
+        values.put("message", message.getMessage());
+
+
+        database.insert(test, null, values);
+    }
     public void addFavorite(Post post) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();

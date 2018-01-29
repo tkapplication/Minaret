@@ -49,6 +49,9 @@ public class Messages extends Fragment {
         recyclerView.setAdapter(new MessagesAdapter(getActivity(), messages));
         if (messages.size() == 0) {
             nofavorite.setVisibility(View.VISIBLE);
+        } else {
+            nofavorite.setVisibility(View.GONE);
+
         }
         return view;
     }
