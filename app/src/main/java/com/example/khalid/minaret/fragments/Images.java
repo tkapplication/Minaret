@@ -41,7 +41,7 @@ public class Images extends Fragment {
     ArrayList<String> images;
     ImagesAdapter imagesAdapter;
     ProgressBar progressBar;
-    ImageView scroll;
+    ImageView scroll_left, scroll_right;
     GridLayoutManager gridLayoutManager;
     RecyclerView recyclerView;
 
@@ -56,7 +56,8 @@ public class Images extends Fragment {
         View view = inflater.inflate(R.layout.images, container, false);
         title.setText("الصور");
         progressBar = view.findViewById(R.id.progressBar);
-        scroll = view.findViewById(R.id.scroll);
+        scroll_left = view.findViewById(R.id.scrollleft);
+        scroll_right = view.findViewById(R.id.scrollright);
         context = getActivity();
         recyclerView = view.findViewById(R.id.recycler);
         imageView = view.findViewById(R.id.imageView);
@@ -65,7 +66,7 @@ public class Images extends Fragment {
         images = new ArrayList<>();
         imagesAdapter = new ImagesAdapter(context, images);
         getImages();
-        scroll.setOnClickListener(new View.OnClickListener() {
+        scroll_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int totalItemCount = recyclerView.getAdapter().getItemCount();
@@ -74,6 +75,14 @@ public class Images extends Fragment {
 
                 if (lastVisibleItemIndex >= totalItemCount) return;
                 gridLayoutManager.smoothScrollToPosition(recyclerView, null, lastVisibleItemIndex + 1);
+
+
+            }
+        });
+        scroll_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerView.getLayoutManager().scrollToPosition(gridLayoutManager.findFirstVisibleItemPosition() - 1);
 
 
             }
@@ -105,7 +114,8 @@ public class Images extends Fragment {
                                     .into(imageView);
                             recyclerView.setAdapter(imagesAdapter);
                             progressBar.setVisibility(View.GONE);
-                            scroll.setVisibility(View.VISIBLE);
+                            scroll_left.setVisibility(View.VISIBLE);
+                            scroll_right.setVisibility(View.VISIBLE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

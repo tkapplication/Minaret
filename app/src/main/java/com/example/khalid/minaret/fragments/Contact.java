@@ -73,19 +73,6 @@ public class Contact extends Fragment {
 //        this.startActivity(intent);
     }
 
-    public void openinstagram(View view) {
 
-//        Uri uri = Uri.parse("http://instagram.com/_u/6609541809");
-//        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-//
-//        likeIng.setPackage("com.instagram.android");
-//
-//        try {
-//            startActivity(likeIng);
-//        } catch (ActivityNotFoundException e) {
-//            startActivity(new Intent(Intent.ACTION_VIEW,
-//                    Uri.parse("http://instagram.com/roo7_app")));
-//        }
-    }
 
 }

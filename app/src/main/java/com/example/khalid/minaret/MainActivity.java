@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.khalid.minaret.fragments.About;
 import com.example.khalid.minaret.fragments.Calender;
 import com.example.khalid.minaret.fragments.Contact;
 import com.example.khalid.minaret.fragments.Favorite;
@@ -128,6 +129,11 @@ public class MainActivity extends AppCompatActivity
                         navigationView.setCheckedItem(R.id.calender);
 
                         break;
+                    case "about":
+                        title.setText("عن التطبيق");
+                        navigationView.setCheckedItem(R.id.about);
+
+                        break;
 
                 }
             }
@@ -154,6 +160,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.videos) {
             final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("videos");
             transaction4.add(R.id.content, Videos.newInstance()).commit();
+        } else if (id == R.id.about) {
+            final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("about");
+            transaction4.add(R.id.content, About.newInstance()).commit();
         } else if (id == R.id.settings) {
             final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("settings");
             transaction4.add(R.id.content, Settings.newInstance()).commit();

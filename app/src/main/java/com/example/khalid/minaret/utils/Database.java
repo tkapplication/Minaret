@@ -24,9 +24,10 @@ public class Database extends SQLiteOpenHelper {
     Context context;
     String test = "test";
     String calender = "calender";
+    String news = "news";
 
     public Database(Context context) {
-        super(context, DataBase_Name, null, 3);
+        super(context, DataBase_Name, null, 4);
         this.context = context;
     }
 
@@ -47,8 +48,10 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-        String sql1 = "CREATE TABLE " + calender + " (id TEXT PRIMARY KEY,title TEXT,description TEXT,start_date TEXT,end_date TEXT)";
+        String sql1 = "CREATE TABLE IF NOT EXISTS " + calender + " (id TEXT PRIMARY KEY,title TEXT,description TEXT,start_date TEXT,end_date TEXT)";
         sqLiteDatabase.execSQL(sql1);
+        String sql2 = "CREATE TABLE IF NOT EXISTS " + news + " (id TEXT PRIMARY KEY,title TEXT,content TEXT,date TEXT,image TEXT,comment TEXT,comment_count TEXT,favorite_count TEXT)";
+        sqLiteDatabase.execSQL(sql2);
 
     }
 
@@ -72,6 +75,23 @@ public class Database extends SQLiteOpenHelper {
         values.put("end_date", calenderModel.getEnd_date());
 
         database.insert(calender, null, values);
+    }
+
+    public void addNews(Post post) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", post.getId());
+        values.put("title", post.getTitle());
+        values.put("content", post.getContent());
+        values.put("date", post.getDate());
+        values.put("image", post.getImage());
+        values.put("comment", post.getComment());
+        values.put("comment_count", post.getComment_count());
+        values.put("favorite_count", post.getFavorite_count());
+
+
+        database.insert(news, null, values);
+
     }
 
     public void addtest(Message message) {
@@ -138,6 +158,33 @@ public class Database extends SQLiteOpenHelper {
                 product.setDescription(cursor.getString(2));
                 product.setStart_date(cursor.getString(3));
                 product.setEnd_date(cursor.getString(4));
+
+                onsaleproduct.add(product);
+            }
+            while (cursor.moveToNext());
+        }
+        return onsaleproduct;
+    }
+
+    public ArrayList<Post> getNews() {
+        ArrayList<Post> onsaleproduct = new ArrayList<>();
+
+
+        String selectQuery = "SELECT  * FROM " + news;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Post product = new Post();
+                product.setId(cursor.getString(0));
+                product.setTitle(cursor.getString(1));
+                product.setContent(cursor.getString(2));
+                product.setDate(cursor.getString(3));
+                product.setImage(cursor.getString(4));
+                product.setComment(cursor.getString(5));
+                product.setComment_count(cursor.getString(6));
+                product.setFavorite_count(cursor.getString(7));
 
                 onsaleproduct.add(product);
             }

@@ -37,6 +37,10 @@
             android:icon="@drawable/ic_favorite_border_black_24dp"
             android:title="المقالات المفضلة" />
         <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="عن التطبيق" />
+        <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_settings"
             android:title="الاعدادت" />

@@ -2,13 +2,15 @@ package com.example.khalid.minaret.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
 import org.jsoup.Jsoup;
 
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 
 /**
  * Created by khalid on 12/22/2017.
@@ -34,9 +36,16 @@ public class Utils {
     }
 
     public static boolean isInternetAvailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-        return cm.getActiveNetworkInfo() != null;
+        StrictMode.setThreadPolicy(policy);
+        try {
+            final InetAddress address = InetAddress.getByName("www.google.com");
+            return !address.equals("");
+        } catch (UnknownHostException e) {
+            // Log error
+        }
+        return false;
 
 
     }
