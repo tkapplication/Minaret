@@ -1,9 +1,8 @@
 package com.example.khalid.minaret.Adapter;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,10 +12,11 @@ import android.widget.TextView;
 
 import com.example.khalid.minaret.MainActivity;
 import com.example.khalid.minaret.R;
-import com.example.khalid.minaret.fragments.MessageDetails;
+import com.example.khalid.minaret.activities.MessageDetails;
 import com.example.khalid.minaret.models.Message;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by khalid on 1/16/2018.
@@ -31,6 +31,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
         this.list = list;
         this.context = context;
         fragmentManager = ((MainActivity) context).getSupportFragmentManager();
+        Collections.reverse(list);
 
     }
 
@@ -66,13 +67,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MessageDetails messageDetails = new MessageDetails();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("title", list.get(getAdapterPosition()).getTitle());
-                    bundle.putString("message", list.get(getAdapterPosition()).getMessage());
-                    messageDetails.setArguments(bundle);
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack("messages");
-                    fragmentTransaction.add(R.id.content, messageDetails).commit();
+                    Intent intent = new Intent(context, MessageDetails.class);
+                    intent.putExtra("title", list.get(getAdapterPosition()).getTitle());
+                    intent.putExtra("message", list.get(getAdapterPosition()).getMessage());
+                    context.startActivity(intent);
                 }
             });
         }

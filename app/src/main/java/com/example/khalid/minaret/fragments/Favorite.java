@@ -54,8 +54,9 @@ public class Favorite extends Fragment implements OnItemClickListener {
         return view;
     }
 
+
     @Override
-    public void onButtonClickListener(int position) {
+    public void onClick(View view, int position) {
 
     }
 }

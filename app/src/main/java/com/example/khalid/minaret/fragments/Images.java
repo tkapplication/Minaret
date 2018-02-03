@@ -69,13 +69,15 @@ public class Images extends Fragment {
         scroll_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                scroll_right.setVisibility(View.VISIBLE);
                 int totalItemCount = recyclerView.getAdapter().getItemCount();
                 if (totalItemCount <= 0) return;
                 int lastVisibleItemIndex = gridLayoutManager.findLastVisibleItemPosition();
 
                 if (lastVisibleItemIndex >= totalItemCount) return;
                 gridLayoutManager.smoothScrollToPosition(recyclerView, null, lastVisibleItemIndex + 1);
-
+                if (lastVisibleItemIndex == totalItemCount - 2)
+                    scroll_left.setVisibility(View.GONE);
 
             }
         });
@@ -84,7 +86,11 @@ public class Images extends Fragment {
             public void onClick(View view) {
                 recyclerView.getLayoutManager().scrollToPosition(gridLayoutManager.findFirstVisibleItemPosition() - 1);
 
+                scroll_left.setVisibility(View.VISIBLE);
+                int FirstVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition();
 
+                if (FirstVisibleItemPosition == 3)
+                    scroll_right.setVisibility(View.GONE);
             }
         });
         return view;
@@ -115,7 +121,7 @@ public class Images extends Fragment {
                             recyclerView.setAdapter(imagesAdapter);
                             progressBar.setVisibility(View.GONE);
                             scroll_left.setVisibility(View.VISIBLE);
-                            scroll_right.setVisibility(View.VISIBLE);
+                            //  scroll_right.setVisibility(View.VISIBLE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

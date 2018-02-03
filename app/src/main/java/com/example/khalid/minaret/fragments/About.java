@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.khalid.minaret.R;
 
+import static com.example.khalid.minaret.MainActivity.title;
+
 /**
  * Created by khalid on 2/1/2018.
  */
@@ -27,6 +29,7 @@ public class About extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.about, container, false);
+        title.setText("عن التطبيق");
 
         return view;
     }

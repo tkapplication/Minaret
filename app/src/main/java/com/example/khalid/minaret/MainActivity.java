@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.example.khalid.minaret.fragments.News;
 import com.example.khalid.minaret.fragments.Platform;
 import com.example.khalid.minaret.fragments.Settings;
 import com.example.khalid.minaret.fragments.Videos;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import static com.example.khalid.minaret.utils.Utils.save;
 
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         content = findViewById(R.id.content);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         bundle = getIntent().getExtras();
-
+        Log.e("token", FirebaseInstanceId.getInstance().getToken());
         fragmentManager = getSupportFragmentManager();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

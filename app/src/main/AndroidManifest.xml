@@ -48,6 +48,10 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".activities.CalenderDetails"></activity>
+        <activity android:name=".activities.MessageDetails"></activity>
+
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.khalid.minaret.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,37 +12,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.khalid.minaret.Adapter.CalenderAdapter;
+import com.example.khalid.minaret.OnItemClickListener;
 import com.example.khalid.minaret.R;
+import com.example.khalid.minaret.activities.CalenderDetails;
 import com.example.khalid.minaret.models.CalenderModel;
 import com.example.khalid.minaret.utils.Database;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.example.khalid.minaret.MainActivity.title;
-import static com.example.khalid.minaret.utils.Utils.base_url;
-import static com.example.khalid.minaret.utils.Utils.html2text;
 
 /**
  * Created by khalid on 1/20/2018.
  */
 
-public class Calender extends Fragment {
+public class Calender extends Fragment implements OnItemClickListener {
     MaterialCalendarView materialCalendarView;
     RecyclerView recyclerView;
     ArrayList<CalenderModel> calendarModes;
     Database database;
+    CalenderAdapter calenderAdapter;
+    SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static Calender newInstance() {
 
@@ -59,51 +55,33 @@ public class Calender extends Fragment {
         recyclerView = view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         materialCalendarView = view.findViewById(R.id.calendarView);
-
         calendarModes = database.getCalender();
+
+        calenderAdapter = new CalenderAdapter(getActivity(), calendarModes);
+        calenderAdapter.setClickListener(this);
         materialCalendarView.setWeekDayTextAppearance(Color.parseColor("#ffffff"));
-        getCalender();
+        recyclerView.setAdapter(calenderAdapter);
         return view;
     }
 
-    private void getCalender() {
-        String url = base_url + "wp-json/tribe/events/v1/events";
-        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        String id = "", title = "", description = "", start = "", end = "";
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            JSONArray jsonArray = jsonObject.getJSONArray("events");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                id = jsonArray.getJSONObject(i).getString("id");
-                                title = jsonArray.getJSONObject(i).getString("title");
-                                description = jsonArray.getJSONObject(i).getString("description");
-                                start = jsonArray.getJSONObject(i).getString("start_date");
-                                end = jsonArray.getJSONObject(i).getString("end_date");
 
-                                calendarModes.add(new CalenderModel(id, title, html2text(description), start, end));
-
-                            }
-                            recyclerView.setAdapter(new CalenderAdapter(getActivity(), calendarModes));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        Volley.newRequestQueue(getActivity()).add(stringRequest2).
-                setRetryPolicy(new DefaultRetryPolicy(
-                        0,
-                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
+    @Override
+    public void onClick(View view, int position) {
+        Date date = null;
+        try {
+            date = fmt.parse(calendarModes.get(position).getStart_date());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        materialCalendarView.setSelectedDate(date);
+        Intent intent = new Intent(getActivity(), CalenderDetails.class);
+        intent.putExtra("title", calendarModes.get(0).getTitle());
+        intent.putExtra("description", calendarModes.get(0).getDescription());
+        intent.putExtra("start", calendarModes.get(0).getStart_date());
+        intent.putExtra("end", calendarModes.get(0).getEnd_date());
+        intent.putExtra("address", calendarModes.get(0).getAddress());
+        startActivity(intent);
     }
+
 
 }
