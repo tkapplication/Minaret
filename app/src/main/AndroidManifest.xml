@@ -51,6 +51,9 @@
 
         <activity android:name=".activities.CalenderDetails"></activity>
         <activity android:name=".activities.MessageDetails"></activity>
+        <activity android:name=".activities.PasswordCode"></activity>
+        <activity android:name=".activities.PasswordReset"></activity>
+        <activity android:name=".activities.UpdatePassword"></activity>
 
     </application>
 

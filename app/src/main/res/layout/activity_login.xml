@@ -26,24 +26,22 @@
                 android:id="@+id/logo"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:src="@drawable/logo" />
 
             <EditText
-                android:textColor="#fff"
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/edit_shape"
                 android:gravity="center_horizontal"
                 android:hint="حسابك"
                 android:inputType="text"
-                android:padding="@dimen/_12sdp"
+                android:padding="@dimen/_10sdp"
+                android:textColor="#fff"
                 android:textSize="@dimen/_18sdp" />
 
             <EditText
-                android:textColor="#fff"
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +50,8 @@
                 android:gravity="center_horizontal"
                 android:hint="رمز المرور"
                 android:inputType="textPassword"
-                android:padding="@dimen/_12sdp"
+                android:padding="@dimen/_10sdp"
+                android:textColor="#fff"
                 android:textSize="@dimen/_18sdp" />
 
             <Button
@@ -75,16 +74,26 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@drawable/edit_shape"
                 android:gravity="center"
-                android:padding="@dimen/_15sdp"
+                android:padding="@dimen/_10sdp"
                 android:text="إنشاء حساب"
                 android:textColor="#fff"
                 android:textSize="@dimen/_18sdp" />
 
             <TextView
+                android:id="@+id/forget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:text="هل نسيت كلمة المرور ؟"
+                android:textColor="#fff"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:text="تسجيل الدخول مع "
                 android:textColor="#fff"
                 android:textSize="@dimen/_18sdp" />

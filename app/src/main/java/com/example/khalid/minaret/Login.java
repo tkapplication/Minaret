@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.khalid.minaret.activities.PasswordReset;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -76,6 +78,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     TwitterAuthClient mTwitterAuthClient;
     GoogleSignInOptions gso;
     GoogleApiClient mGoogleApiClient;
+    TextView forget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +142,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         progressBar = findViewById(R.id.progressBar);
         facebook = findViewById(R.id.facebook);
         twitter = findViewById(R.id.twitter);
-
+        forget = findViewById(R.id.forget);
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, PasswordReset.class));
+            }
+        });
         register.setOnClickListener(this);
         login.setOnClickListener(this);
         facebook.setOnClickListener(this);
