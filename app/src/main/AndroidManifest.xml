@@ -55,6 +55,7 @@
         <activity android:name=".activities.PasswordReset"></activity>
         <activity android:name=".activities.UpdatePassword"></activity>
 
+        <receiver android:name=".services.MyBroadcastReceiver"></receiver>
     </application>
 
 </manifest>
