@@ -1,4 +1,4 @@
-package com.example.khalid.minaret;
+package com.example.khalid.minaret.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.khalid.minaret.activities.PasswordReset;
+import com.example.khalid.minaret.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -292,6 +292,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Login.this, "حدثت مشكلة اثناء الدخول", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
 
             }
 

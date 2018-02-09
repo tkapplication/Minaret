@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.example.khalid.minaret.MainActivity.title;
+import static com.example.khalid.minaret.activities.MainActivity.title;
 
 /**
  * Created by khalid on 1/20/2018.

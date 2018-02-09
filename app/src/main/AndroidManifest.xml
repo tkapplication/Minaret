@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Login"
+            android:name=".activities.Login"
             android:windowSoftInputMode="stateVisible|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +27,8 @@
         <!-- <activity -->
         <!-- android:name=".Register" -->
         <!-- android:windowSoftInputMode="stateVisible|adjustPan" /> -->
-        <activity android:name=".Register" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activities.Register" />
+        <activity android:name=".activities.MainActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

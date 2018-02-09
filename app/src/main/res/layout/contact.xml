@@ -80,21 +80,12 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:text="تواصل معنا"
-        android:textColor="#fff"
-        android:textSize="@dimen/_19sdp" />
+
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/contact"
+        android:layout_below="@+id/header"
         android:src="@drawable/logo" />
 
 </RelativeLayout>

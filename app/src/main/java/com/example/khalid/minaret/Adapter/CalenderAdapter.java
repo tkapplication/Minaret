@@ -4,13 +4,14 @@ import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,10 +22,13 @@ import com.example.khalid.minaret.R;
 import com.example.khalid.minaret.models.CalenderModel;
 import com.example.khalid.minaret.services.MyBroadcastReceiver;
 import com.example.khalid.minaret.utils.Database;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
@@ -39,6 +43,11 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
     SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Database database;
     ArrayList<String> positions;
+    int position = 0;
+    long diff;
+    long diffDays;
+    MaterialCalendarView materialCalendarView;
+    boolean isopen = false;
     private Context context;
     private OnItemClickListener clickListener;
 
@@ -96,23 +105,64 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
         this.clickListener = itemClickListener;
     }
 
-    public void startAlert() {
-        int i = 15;
+    public void startAlert(int time) {
         Intent intent = new Intent(context, MyBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                context, 234324243, intent, 0);
+                context, Integer.parseInt(list.get(position).getId()), intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-                + (i * 1000), pendingIntent);
-        Toast.makeText(context, "Alarm set in " + i + " seconds", Toast.LENGTH_LONG).show();
+                + ((time + 1) * 24 * 60 * 60 * 1000), pendingIntent);
+        Toast.makeText(context, "تم ضبط المنبه", Toast.LENGTH_LONG).show();
+        database.addAlarm(list.get(position));
     }
 
     private void openDialog() {
+        isopen = true;
         final Dialog dialog = new Dialog(context); // Context, this, etc.
         dialog.setContentView(R.layout.date_dialog);
-        DatePicker datePicker = dialog.findViewById(R.id.date);
-        datePicker.ge
+        materialCalendarView = dialog.findViewById(R.id.date);
+        Button save = dialog.findViewById(R.id.save);
+        final String date = fmt.format(Calendar.getInstance().getTime());
+        try {
+            materialCalendarView.state().edit().setMinimumDate(fmt.parse(date)).commit();
+            materialCalendarView.state().edit().setMaximumDate(fmt.parse(list.get(position).getStart_date())).commit();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!getSelectedDatesString().equals("")) {
+                    try {
+                        diff = Math.abs(fmt.parse(getSelectedDatesString()).getTime() - fmt.parse(date).getTime());
+                        diffDays = diff / (24 * 60 * 60 * 1000) + 1;
+                        startAlert((int) diffDays);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
         dialog.show();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                isopen = false;
+            }
+        });
+    }
+
+    private String getSelectedDatesString() {
+        CalendarDay date = null;
+        date = materialCalendarView.getSelectedDate();
+
+        if (materialCalendarView.getSelectedDate() != null)
+            return fmt.format(date.getDate());
+        else return "";
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -168,6 +218,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     openDialog();
+                    position = getAdapterPosition();
                 }
             });
         }

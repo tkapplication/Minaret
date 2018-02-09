@@ -20,7 +20,7 @@
             android:paddingLeft="@dimen/_45sdp"
             android:paddingRight="@dimen/_45sdp"
             android:paddingTop="@dimen/_30sdp"
-            tools:context="com.example.khalid.minaret.Login">
+            tools:context="com.example.khalid.minaret.activities.Login">
 
             <ImageView
                 android:id="@+id/logo"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="هل نسيت كلمة المرور ؟"
+                android:text="هل نسيت رمز المرور ؟"
                 android:textColor="#fff"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />

@@ -1,4 +1,4 @@
-package com.example.khalid.minaret;
+package com.example.khalid.minaret.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.khalid.minaret.R;
 import com.example.khalid.minaret.fragments.About;
 import com.example.khalid.minaret.fragments.Calender;
 import com.example.khalid.minaret.fragments.Contact;
@@ -68,7 +69,6 @@ public class MainActivity extends AppCompatActivity
         final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("news");
         transaction4.replace(R.id.content, News.newInstance()).commit();
         navigationView.setCheckedItem(R.id.news);
-
     }
 
     @Override
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
                 String name = fragmentManager.getBackStackEntryAt(count - 2).getName();
                 switch (name) {
                     case "news":
-                        title.setText("الاخبار");
+                        title.setText("نشاطات واخبار");
                         navigationView.setCheckedItem(R.id.news);
                         break;
                     case "images":
@@ -178,14 +178,13 @@ public class MainActivity extends AppCompatActivity
             final FragmentTransaction transaction4 = fragmentManager.beginTransaction().addToBackStack("calendar");
             transaction4.add(R.id.content, Calender.newInstance()).commit();
         } else if (id == R.id.logout) {
+            deleteDatabase("woovendor");
+
             Intent i = new Intent(MainActivity.this, Login.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            // Add new Flag to start new Activity
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            // Staring Login Activity
             startActivity(i);
             save(getApplicationContext(), "login", "no");
         } else if (id == R.id.platform) {

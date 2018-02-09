@@ -18,7 +18,7 @@
             android:paddingBottom="@dimen/_15sdp"
             android:paddingLeft="@dimen/_40sdp"
             android:paddingRight="@dimen/_40sdp"
-            tools:context="com.example.khalid.minaret.Register">
+            tools:context="com.example.khalid.minaret.activities.Register">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,6 +37,7 @@
                 android:weightSum="2">
 
                 <ImageView
+                    android:id="@+id/avatar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/_15sdp"
@@ -57,9 +58,8 @@
             </LinearLayout>
 
             <EditText
-                android:textColor="#fff"
-
                 android:id="@+id/username"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -67,13 +67,13 @@
                 android:background="@drawable/edit_shape"
                 android:hint="اسم المستخدم"
                 android:inputType="text"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_10sdp"
+                android:textColor="#fff" />
 
 
             <EditText
-                android:textColor="#fff"
-
                 android:id="@+id/email"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -81,12 +81,12 @@
                 android:background="@drawable/edit_shape"
                 android:hint="البريد الإلكتروني"
                 android:inputType="textEmailAddress"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_10sdp"
+                android:textColor="#fff" />
 
             <EditText
-                android:textColor="#fff"
-
                 android:id="@+id/password"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -94,12 +94,12 @@
                 android:gravity="right"
                 android:hint="رمز المرور"
                 android:inputType="textPassword"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_10sdp"
+                android:textColor="#fff" />
 
             <EditText
-                android:textColor="#fff"
-
                 android:id="@+id/phone"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -107,7 +107,8 @@
                 android:background="@drawable/edit_shape"
                 android:hint="رقم الهاتف"
                 android:inputType="phone"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_10sdp"
+                android:textColor="#fff" />
 
             <LinearLayout
                 android:layout_width="match_parent"

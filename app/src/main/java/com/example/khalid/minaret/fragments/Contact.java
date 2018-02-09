@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.khalid.minaret.R;
 
-import static com.example.khalid.minaret.MainActivity.title;
+import static com.example.khalid.minaret.activities.MainActivity.title;
 
 /**
  * Created by khalid on 12/30/2017.

@@ -1,12 +1,15 @@
-package com.example.khalid.minaret;
+package com.example.khalid.minaret.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -17,11 +20,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.khalid.minaret.R;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -36,6 +41,9 @@ public class Register extends AppCompatActivity {
     Button register;
     ProgressBar progressBar;
     Bundle bundle;
+    ImageView avatar;
+    int REQUEST_CODE = 111;
+    private String imagepath = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,14 @@ public class Register extends AppCompatActivity {
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
         progressBar = findViewById(R.id.progressBar);
+        avatar = findViewById(R.id.avatar);
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, REQUEST_CODE);
+            }
+        });
         bundle = getIntent().getExtras();
         if (bundle != null) {
             username.setText(bundle.getString("username"));
@@ -229,6 +245,27 @@ public class Register extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+
+            //getting the image Uri
+            Uri imageUri = data.getData();
+            try {
+                //getting bitmap object from uri
+                avatar.setImageBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri));
+
+                //displaying selected image to imageview
+                // imageView.setImageBitmap(bitmap);
+
+                //calling the method uploadBitmap to upload image
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

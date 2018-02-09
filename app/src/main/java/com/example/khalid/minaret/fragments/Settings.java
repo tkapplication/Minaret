@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.example.khalid.minaret.R;
 
-import static com.example.khalid.minaret.MainActivity.title;
+import static com.example.khalid.minaret.activities.MainActivity.title;
 import static com.example.khalid.minaret.utils.Utils.get;
 import static com.example.khalid.minaret.utils.Utils.save;
 

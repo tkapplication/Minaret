@@ -25,6 +25,7 @@ public class Database extends SQLiteOpenHelper {
     String test = "test";
     String calender = "calender";
     String news = "news";
+    String alarm = "alarm";
 
     public Database(Context context) {
         super(context, DataBase_Name, null, 4);
@@ -41,7 +42,10 @@ public class Database extends SQLiteOpenHelper {
         String sql4 = "CREATE TABLE " + calender + " (id TEXT PRIMARY KEY,title TEXT,description TEXT,start_date TEXT,end_date TEXT,address TEXT)";
         sqLiteDatabase.execSQL(sql4);
         String sql5 = "CREATE TABLE " + news + " (id TEXT PRIMARY KEY,title TEXT,content TEXT,date TEXT,image TEXT,comment TEXT,comment_count TEXT,favorite_count TEXT)";
+        String sql6 = "CREATE TABLE " + alarm + " (id TEXT PRIMARY KEY,title TEXT,description TEXT,start_date TEXT,end_date TEXT,address TEXT)";
+
         sqLiteDatabase.execSQL(sql5);
+        sqLiteDatabase.execSQL(sql6);
 
         sqLiteDatabase.execSQL(sql3);
         sqLiteDatabase.execSQL(sql1);
@@ -81,6 +85,19 @@ public class Database extends SQLiteOpenHelper {
         values.put("address", calenderModel.getAddress());
 
         database.insert(calender, null, values);
+    }
+
+    public void addAlarm(CalenderModel calenderModel) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", calenderModel.getId());
+        values.put("title", calenderModel.getTitle());
+        values.put("description", calenderModel.getDescription());
+        values.put("start_date", calenderModel.getStart_date());
+        values.put("end_date", calenderModel.getEnd_date());
+        values.put("address", calenderModel.getAddress());
+
+        database.insert(alarm, null, values);
     }
 
     public void addNews(Post post) {
@@ -144,6 +161,31 @@ public class Database extends SQLiteOpenHelper {
 
 
         String selectQuery = "SELECT  * FROM " + calender;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                CalenderModel product = new CalenderModel();
+                product.setId(cursor.getString(0));
+                product.setTitle(cursor.getString(1));
+                product.setDescription(cursor.getString(2));
+                product.setStart_date(cursor.getString(3));
+                product.setEnd_date(cursor.getString(4));
+                product.setAddress(cursor.getString(5));
+
+                onsaleproduct.add(product);
+            }
+            while (cursor.moveToNext());
+        }
+        return onsaleproduct;
+    }
+
+    public ArrayList<CalenderModel> getAlarm() {
+        ArrayList<CalenderModel> onsaleproduct = new ArrayList<>();
+
+
+        String selectQuery = "SELECT  * FROM " + alarm;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -236,6 +278,13 @@ public class Database extends SQLiteOpenHelper {
     public void deleteCalender(String id) {
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(calender, "id=?", new String[]{id});
+        database.close();
+
+    }
+
+    public void deleteAlarm(String id) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(alarm, "id=?", new String[]{id});
         database.close();
 
     }

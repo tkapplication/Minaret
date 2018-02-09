@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.khalid.minaret.MainActivity;
 import com.example.khalid.minaret.OnItemClickListener;
 import com.example.khalid.minaret.R;
+import com.example.khalid.minaret.activities.MainActivity;
 import com.example.khalid.minaret.fragments.PostDetails;
 import com.example.khalid.minaret.models.Post;
 import com.example.khalid.minaret.utils.Database;

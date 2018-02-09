@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.khalid.minaret.MainActivity;
 import com.example.khalid.minaret.R;
+import com.example.khalid.minaret.activities.MainActivity;
 import com.example.khalid.minaret.activities.MessageDetails;
 import com.example.khalid.minaret.models.Message;
 
