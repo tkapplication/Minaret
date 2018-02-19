@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.khalid.minaret.OnItemClickListener;
@@ -48,6 +49,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
     long diffDays;
     MaterialCalendarView materialCalendarView;
     boolean isopen = false;
+    TimePicker timePicker;
     private Context context;
     private OnItemClickListener clickListener;
 
@@ -112,7 +114,6 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
                 + ((time + 1) * 24 * 60 * 60 * 1000), pendingIntent);
-        Toast.makeText(context, "تم ضبط المنبه", Toast.LENGTH_LONG).show();
         database.addAlarm(list.get(position));
     }
 
@@ -121,7 +122,10 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
         final Dialog dialog = new Dialog(context); // Context, this, etc.
         dialog.setContentView(R.layout.date_dialog);
         materialCalendarView = dialog.findViewById(R.id.date);
-        Button save = dialog.findViewById(R.id.save);
+        timePicker = dialog.findViewById(R.id.time);
+        final Button save = dialog.findViewById(R.id.save);
+        final Button set = dialog.findViewById(R.id.set);
+
         final String date = fmt.format(Calendar.getInstance().getTime());
         try {
             materialCalendarView.state().edit().setMinimumDate(fmt.parse(date)).commit();
@@ -134,6 +138,10 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 if (!getSelectedDatesString().equals("")) {
+                    save.setVisibility(View.GONE);
+                    set.setVisibility(View.VISIBLE);
+                    materialCalendarView.setVisibility(View.GONE);
+                    timePicker.setVisibility(View.VISIBLE);
                     try {
                         diff = Math.abs(fmt.parse(getSelectedDatesString()).getTime() - fmt.parse(date).getTime());
                         diffDays = diff / (24 * 60 * 60 * 1000) + 1;
@@ -145,7 +153,14 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
             }
         });
 
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+                Toast.makeText(context, "تم ضبط المنبه", Toast.LENGTH_LONG).show();
 
+            }
+        });
         dialog.show();
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 

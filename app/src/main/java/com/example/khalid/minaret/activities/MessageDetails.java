@@ -28,7 +28,8 @@ public class MessageDetails extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        notificationManager.cancelAll();
+        if (notificationManager != null)
+            notificationManager.cancelAll();
         setContentView(R.layout.message_details);
         message = findViewById(R.id.message);
         title = findViewById(R.id.title);

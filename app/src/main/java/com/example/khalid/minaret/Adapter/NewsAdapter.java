@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.khalid.minaret.OnItemClickListener;
 import com.example.khalid.minaret.R;
+import com.example.khalid.minaret.activities.Login;
 import com.example.khalid.minaret.activities.MainActivity;
 import com.example.khalid.minaret.fragments.PostDetails;
 import com.example.khalid.minaret.models.Post;
@@ -35,7 +36,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public NewsAdapter(Context context, ArrayList<Post> list, OnItemClickListener onItemClickListener) {
         this.list = list;
         this.context = context;
-        fragmentManager = ((MainActivity) context).getSupportFragmentManager();
+        try {
+            fragmentManager = ((MainActivity) context).getSupportFragmentManager();
+
+        } catch (NullPointerException e) {
+            fragmentManager = ((Login) context).getSupportFragmentManager();
+
+        }
         database = new Database(context);
         this.onItemClickListener = onItemClickListener;
     }

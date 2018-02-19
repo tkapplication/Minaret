@@ -4,7 +4,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
+import android.net.Uri;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -29,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static com.example.khalid.minaret.utils.Utils.base_url;
+import static com.example.khalid.minaret.utils.Utils.get;
 import static com.example.khalid.minaret.utils.Utils.html2text;
 
 
@@ -83,44 +87,44 @@ public class MyFCMService extends FirebaseMessagingService {
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(pendingIntent);
 
-//        if (get(getApplicationContext(), "notification_sound").equals("")) {
-//            notificationBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
-//        } else
-//
-//            notificationBuilder.setSound(Uri.parse(get(getApplicationContext(), "notification_sound")));
-//
-//        if (!get(getApplicationContext(), "notification_vibration").equals("") || get(getApplicationContext(), "notification_vibration").equals("yes")) {
-//
-//            notificationBuilder.setVibrate(new long[]{1000, 1000});
-//        }
-//        switch (get(getApplicationContext(), "notification_light")) {
-//
-//            case "1":
-//                notificationBuilder.setLights(Color.RED, 500, 500);
-//
-//                break;
-//            case "2":
-//                notificationBuilder.setLights(Color.WHITE, 500, 500);
-//
-//                break;
-//            case "3":
-//                notificationBuilder.setLights(Color.GREEN, 500, 500);
-//
-//                break;
-//            case "4":
-//                notificationBuilder.setLights(Color.YELLOW, 500, 500);
-//
-//                break;
-//            case "5":
-//                notificationBuilder.setLights(Color.BLUE, 500, 500);
-//
-//                break;
-//            case "6":
-//                notificationBuilder.setLights(Color.CYAN, 500, 500);
-//
-//                break;
+        if (get(getApplicationContext(), "notification_sound").equals("")) {
+            notificationBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+        } else
 
-        // }
+            notificationBuilder.setSound(Uri.parse(get(getApplicationContext(), "notification_sound")));
+
+        if (!get(getApplicationContext(), "notification_vibration").equals("") || get(getApplicationContext(), "notification_vibration").equals("yes")) {
+
+            notificationBuilder.setVibrate(new long[]{1000, 1000});
+        }
+        switch (get(getApplicationContext(), "notification_light")) {
+
+            case "1":
+                notificationBuilder.setLights(Color.RED, 500, 500);
+
+                break;
+            case "2":
+                notificationBuilder.setLights(Color.WHITE, 500, 500);
+
+                break;
+            case "3":
+                notificationBuilder.setLights(Color.GREEN, 500, 500);
+
+                break;
+            case "4":
+                notificationBuilder.setLights(Color.YELLOW, 500, 500);
+
+                break;
+            case "5":
+                notificationBuilder.setLights(Color.BLUE, 500, 500);
+
+                break;
+            case "6":
+                notificationBuilder.setLights(Color.CYAN, 500, 500);
+
+                break;
+
+        }
 
 
         notificationManager.notify(NOTID /* ID of notification */, notificationBuilder.build());
@@ -147,44 +151,44 @@ public class MyFCMService extends FirebaseMessagingService {
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(pendingIntent);
 
-//        if (get(getApplicationContext(), "notification_sound").equals("")) {
-//            notificationBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
-//        } else
-//
-//            notificationBuilder.setSound(Uri.parse(get(getApplicationContext(), "notification_sound")));
-//
-//        if (!get(getApplicationContext(), "notification_vibration").equals("") || get(getApplicationContext(), "notification_vibration").equals("yes")) {
-//
-//            notificationBuilder.setVibrate(new long[]{1000, 1000});
-//        }
-//        switch (get(getApplicationContext(), "notification_light")) {
-//
-//            case "1":
-//                notificationBuilder.setLights(Color.RED, 500, 500);
-//
-//                break;
-//            case "2":
-//                notificationBuilder.setLights(Color.WHITE, 500, 500);
-//
-//                break;
-//            case "3":
-//                notificationBuilder.setLights(Color.GREEN, 500, 500);
-//
-//                break;
-//            case "4":
-//                notificationBuilder.setLights(Color.YELLOW, 500, 500);
-//
-//                break;
-//            case "5":
-//                notificationBuilder.setLights(Color.BLUE, 500, 500);
-//
-//                break;
-//            case "6":
-//                notificationBuilder.setLights(Color.CYAN, 500, 500);
-//
-//                break;
+        if (get(getApplicationContext(), "notification_sound").equals("")) {
+            notificationBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+        } else
 
-        // }
+            notificationBuilder.setSound(Uri.parse(get(getApplicationContext(), "notification_sound")));
+
+        if (!get(getApplicationContext(), "notification_vibration").equals("") || get(getApplicationContext(), "notification_vibration").equals("yes")) {
+
+            notificationBuilder.setVibrate(new long[]{1000, 1000});
+        }
+        switch (get(getApplicationContext(), "notification_light")) {
+
+            case "1":
+                notificationBuilder.setLights(Color.RED, 500, 500);
+
+                break;
+            case "2":
+                notificationBuilder.setLights(Color.WHITE, 500, 500);
+
+                break;
+            case "3":
+                notificationBuilder.setLights(Color.GREEN, 500, 500);
+
+                break;
+            case "4":
+                notificationBuilder.setLights(Color.YELLOW, 500, 500);
+
+                break;
+            case "5":
+                notificationBuilder.setLights(Color.BLUE, 500, 500);
+
+                break;
+            case "6":
+                notificationBuilder.setLights(Color.CYAN, 500, 500);
+
+                break;
+
+        }
 
 
         notificationManager.notify(NOTID /* ID of notification */, notificationBuilder.build());

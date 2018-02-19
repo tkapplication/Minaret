@@ -89,7 +89,7 @@ public class Images extends Fragment {
                 scroll_left.setVisibility(View.VISIBLE);
                 int FirstVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition();
 
-                if (FirstVisibleItemPosition == 3)
+                if (FirstVisibleItemPosition == 5)
                     scroll_right.setVisibility(View.GONE);
             }
         });

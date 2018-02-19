@@ -75,11 +75,11 @@ public class Calender extends Fragment implements OnItemClickListener {
         }
         materialCalendarView.setSelectedDate(date);
         Intent intent = new Intent(getActivity(), CalenderDetails.class);
-        intent.putExtra("title", calendarModes.get(0).getTitle());
-        intent.putExtra("description", calendarModes.get(0).getDescription());
-        intent.putExtra("start", calendarModes.get(0).getStart_date());
-        intent.putExtra("end", calendarModes.get(0).getEnd_date());
-        intent.putExtra("address", calendarModes.get(0).getAddress());
+        intent.putExtra("title", calendarModes.get(position).getTitle());
+        intent.putExtra("description", calendarModes.get(position).getDescription());
+        intent.putExtra("start", calendarModes.get(position).getStart_date());
+        intent.putExtra("end", calendarModes.get(position).getEnd_date());
+        intent.putExtra("address", calendarModes.get(position).getAddress());
         startActivity(intent);
     }
 
